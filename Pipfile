@@ -1,0 +1,17 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[scripts]
+dev = "sh -c 'FLASK_APP=app FLASK_DEBUG=1 flask run'"
+prod = "gunicorn --workers 4 wsgi:application --bind 0.0.0.0:80 --log-syslog --log-level DEBUG"
+
+[packages]
+flask = "*"
+gunicorn = "*"
+flask-sqlalchemy = "*"
+requests = "*"
+
+[requires]
+python_version = "3.6"
