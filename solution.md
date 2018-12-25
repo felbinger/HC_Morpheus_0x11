@@ -2,7 +2,7 @@
 
 1. The website contains a field to enter a login token. In the text below the login button is a link to a `development.zip` file.
 2. Download and unzip the file, you get a `.class` and a `.jar` file. You can't really do something with the class file, we are going to check if we can decompile the jar file with [JD-GUI](http://jd.benow.ca/).
-![IMG]()
+![IMG](https://i.imgur.com/SP9Drp4.png)
 3. Extract the resource (`generateLoginToken`) and the Method (`POST`) from the Client class and try to access it with curl.
 ```
 $ curl -X POST http://185.244.192.170:20018/generateLoginToken
